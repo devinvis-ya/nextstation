@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-sky-top: #a8c4d9;
+  --color-sky-bot: #dbe7ee;
+  --color-forest: #5e7a5e;
+  --color-poles: #4a5a4a;
+  --color-interior: #7a5a3a;
+  --color-lamp: #f0d090;
+  --color-table: #5a3e28;
+  --color-reflection: rgba(240, 208, 144, 0.08);
+  --transition-phase: 1.2s ease;
+}
+
+html, body, #root { height: 100%; width: 100%; margin: 0; padding: 0; }
+body { background: #000; color: #fff; overflow: hidden; }
+* { box-sizing: border-box; }
