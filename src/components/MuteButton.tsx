@@ -3,9 +3,11 @@ import { Volume2, VolumeX } from 'lucide-react';
 interface Props {
   muted: boolean;
   onToggle: () => void;
+  mobile?: boolean;
 }
 
-export default function MuteButton({ muted, onToggle }: Props) {
+export default function MuteButton({ muted, onToggle, mobile = false }: Props) {
+  const size = mobile ? 13 : 18;
   return (
     <button
       onClick={(e) => {
@@ -14,13 +16,16 @@ export default function MuteButton({ muted, onToggle }: Props) {
       }}
       style={{
         position: 'absolute',
-        bottom: 16,
-        right: 16,
+        // На мобиле — в верхнем левом углу, чтобы не перекрывать прогресс-бар
+        top: mobile ? 6 : undefined,
+        left: mobile ? 6 : undefined,
+        bottom: mobile ? undefined : 16,
+        right: mobile ? undefined : 16,
         zIndex: 30,
-        background: 'rgba(0,0,0,0.6)',
+        background: 'rgba(0,0,0,0.78)',
         border: '1px solid #ff8c00',
         borderRadius: 6,
-        padding: 8,
+        padding: mobile ? 4 : 8,
         color: '#ff8c00',
         cursor: 'pointer',
         display: 'flex',
@@ -28,7 +33,7 @@ export default function MuteButton({ muted, onToggle }: Props) {
       }}
       aria-label={muted ? 'Включить звук' : 'Выключить звук'}
     >
-      {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+      {muted ? <VolumeX size={size} /> : <Volume2 size={size} />}
     </button>
   );
 }

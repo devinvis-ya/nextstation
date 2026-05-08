@@ -1,21 +1,24 @@
 interface Props {
   width: number;
   height: number;
+  mobile?: boolean;
 }
 
-const TOP_FRAME = 28;
-const SIDE_FRAME = 28;
-const BOTTOM_FRAME = 92;
 const RIVET = 6;
 
-export default function WindowFrame({ width, height }: Props) {
+export default function WindowFrame({ width, height, mobile = false }: Props) {
+  const TOP_FRAME = mobile ? 18 : 28;
+  const SIDE_FRAME = mobile ? 14 : 28;
+  const BOTTOM_FRAME = mobile ? 70 : 92;
+  const rivetSize = mobile ? 4 : RIVET;
+
   // Заклёпки по углам
   const rivets: JSX.Element[] = [];
   const cornerPositions: [number, number][] = [
-    [SIDE_FRAME / 2 - RIVET / 2, TOP_FRAME / 2 - RIVET / 2],
-    [width - SIDE_FRAME / 2 - RIVET / 2, TOP_FRAME / 2 - RIVET / 2],
-    [SIDE_FRAME / 2 - RIVET / 2, height - BOTTOM_FRAME / 2 - RIVET / 2],
-    [width - SIDE_FRAME / 2 - RIVET / 2, height - BOTTOM_FRAME / 2 - RIVET / 2],
+    [SIDE_FRAME / 2 - rivetSize / 2, TOP_FRAME / 2 - rivetSize / 2],
+    [width - SIDE_FRAME / 2 - rivetSize / 2, TOP_FRAME / 2 - rivetSize / 2],
+    [SIDE_FRAME / 2 - rivetSize / 2, height - BOTTOM_FRAME / 2 - rivetSize / 2],
+    [width - SIDE_FRAME / 2 - rivetSize / 2, height - BOTTOM_FRAME / 2 - rivetSize / 2],
   ];
   cornerPositions.forEach(([x, y], i) => {
     rivets.push(
@@ -23,31 +26,32 @@ export default function WindowFrame({ width, height }: Props) {
         key={`r${i}`}
         x={x}
         y={y}
-        width={RIVET}
-        height={RIVET}
+        width={rivetSize}
+        height={rivetSize}
         fill="#3a2818"
         shapeRendering="crispEdges"
       />,
     );
   });
   // Боковые заклёпки (на вертикальных гранях)
-  for (let y = TOP_FRAME + 60; y < height - BOTTOM_FRAME - 30; y += 80) {
+  const sideStep = mobile ? 60 : 80;
+  for (let y = TOP_FRAME + 60; y < height - BOTTOM_FRAME - 30; y += sideStep) {
     rivets.push(
       <rect
         key={`lr-${y}`}
-        x={SIDE_FRAME / 2 - RIVET / 2}
+        x={SIDE_FRAME / 2 - rivetSize / 2}
         y={y}
-        width={RIVET}
-        height={RIVET}
+        width={rivetSize}
+        height={rivetSize}
         fill="#3a2818"
         shapeRendering="crispEdges"
       />,
       <rect
         key={`rr-${y}`}
-        x={width - SIDE_FRAME / 2 - RIVET / 2}
+        x={width - SIDE_FRAME / 2 - rivetSize / 2}
         y={y}
-        width={RIVET}
-        height={RIVET}
+        width={rivetSize}
+        height={rivetSize}
         fill="#3a2818"
         shapeRendering="crispEdges"
       />,
@@ -64,7 +68,6 @@ export default function WindowFrame({ width, height }: Props) {
       viewBox={`0 0 ${width} ${height}`}
       style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
     >
-      {/* 4 рамочных прямоугольника */}
       <rect x="0" y="0" width={width} height={TOP_FRAME}
             fill="var(--color-interior)" shapeRendering="crispEdges" />
       <rect x="0" y={height - BOTTOM_FRAME} width={width} height={BOTTOM_FRAME}
@@ -74,7 +77,6 @@ export default function WindowFrame({ width, height }: Props) {
       <rect x={width - SIDE_FRAME} y="0" width={SIDE_FRAME} height={height}
             fill="var(--color-interior)" shapeRendering="crispEdges" />
 
-      {/* Тёмная внутренняя кромка (тень от рамки на стекле) */}
       <rect x={SIDE_FRAME} y={TOP_FRAME} width={innerW} height="2"
             fill="rgba(0,0,0,0.45)" shapeRendering="crispEdges" />
       <rect x={SIDE_FRAME} y={height - BOTTOM_FRAME - 2} width={innerW} height="2"
@@ -84,15 +86,12 @@ export default function WindowFrame({ width, height }: Props) {
       <rect x={width - SIDE_FRAME - 2} y={TOP_FRAME} width="2" height={innerH}
             fill="rgba(0,0,0,0.45)" shapeRendering="crispEdges" />
 
-      {/* Светлый блик сверху рамки */}
       <rect x="0" y="0" width={width} height="3"
             fill="rgba(255,220,180,0.35)" shapeRendering="crispEdges" />
 
-      {/* Светлая кромка между нижней рамкой и сценой (как полка) */}
       <rect x={SIDE_FRAME} y={height - BOTTOM_FRAME} width={innerW} height="3"
             fill="rgba(255,220,180,0.25)" shapeRendering="crispEdges" />
 
-      {/* Тёплый отсвет лампы на стекле */}
       <rect x={SIDE_FRAME} y={TOP_FRAME} width={innerW} height={innerH}
             fill="var(--color-reflection)" />
 

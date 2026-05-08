@@ -1,34 +1,37 @@
 interface Props {
   progress: number;
+  mobile?: boolean;
 }
 
-const chipStyle: React.CSSProperties = {
-  background: 'rgba(0,0,0,0.85)',
-  border: '1px solid #ff8c00',
-  borderRadius: 3,
-  padding: '2px 8px',
-  color: '#ff8c00',
-  fontSize: 11,
-  letterSpacing: 2,
-  whiteSpace: 'nowrap',
-  boxShadow: '0 0 6px rgba(255,140,0,0.25)',
-};
+export default function ProgressBar({ progress, mobile = false }: Props) {
+  const chipStyle: React.CSSProperties = {
+    background: 'rgba(0,0,0,0.85)',
+    border: '1px solid #ff8c00',
+    borderRadius: 3,
+    padding: mobile ? '1px 5px' : '2px 8px',
+    color: '#ff8c00',
+    fontSize: mobile ? 8 : 11,
+    letterSpacing: mobile ? 1 : 2,
+    whiteSpace: 'nowrap',
+    boxShadow: '0 0 6px rgba(255,140,0,0.25)',
+  };
 
-export default function ProgressBar({ progress }: Props) {
   return (
     <div
       style={{
         position: 'absolute',
-        bottom: 28,
+        bottom: mobile ? 18 : 28,
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '80%',
+        width: mobile ? 'calc(100% - 16px)' : '80%',
         maxWidth: 880,
+        paddingLeft: mobile ? 4 : 0,
+        paddingRight: mobile ? 4 : 0,
         zIndex: 25,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: 6,
+        gap: mobile ? 4 : 6,
         pointerEvents: 'none',
       }}
     >
@@ -48,7 +51,7 @@ export default function ProgressBar({ progress }: Props) {
       <div
         style={{
           width: '100%',
-          height: 8,
+          height: mobile ? 6 : 8,
           background: 'rgba(0,0,0,0.78)',
           border: '1px solid #ff8c00',
           boxShadow: '0 0 10px rgba(255,140,0,0.3)',
@@ -67,10 +70,10 @@ export default function ProgressBar({ progress }: Props) {
         <div
           style={{
             position: 'absolute',
-            left: `calc(${progress}% - 6px)`,
-            top: -4,
-            width: 12,
-            height: 16,
+            left: `calc(${progress}% - ${mobile ? 4 : 6}px)`,
+            top: mobile ? -3 : -4,
+            width: mobile ? 8 : 12,
+            height: mobile ? 12 : 16,
             background: '#ffd060',
             border: '1px solid #ff8c00',
             boxShadow: '0 0 6px rgba(255,208,96,0.85)',

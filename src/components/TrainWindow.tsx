@@ -3,16 +3,17 @@ import Sky, { SKY_WIDTH, SKY_HEIGHT } from '../art/layers/Sky';
 import Forest, { FOREST_WIDTH, FOREST_HEIGHT } from '../art/layers/Forest';
 import Poles, { POLES_WIDTH, POLES_HEIGHT } from '../art/layers/Poles';
 
-// Должно совпадать с BOTTOM_FRAME в WindowFrame.tsx
-const BOTTOM_FRAME = 92;
-
 interface Props {
   speed: number;
   paused?: boolean;
+  mobile?: boolean;
   onWindowClick: () => void;
 }
 
-export default function TrainWindow({ speed, paused = false, onWindowClick }: Props) {
+export default function TrainWindow({ speed, paused = false, mobile = false, onWindowClick }: Props) {
+  // Должно совпадать с BOTTOM_FRAME в WindowFrame.tsx
+  const BOTTOM_FRAME = mobile ? 70 : 92;
+
   return (
     <div
       onClick={onWindowClick}
@@ -30,7 +31,7 @@ export default function TrainWindow({ speed, paused = false, onWindowClick }: Pr
         speedFactor={0.05}
         speed={speed}
         paused={paused}
-        bottom={BOTTOM_FRAME + 120}
+        bottom={BOTTOM_FRAME + (mobile ? 80 : 120)}
         height={SKY_HEIGHT}
       >
         <Sky />
@@ -40,7 +41,7 @@ export default function TrainWindow({ speed, paused = false, onWindowClick }: Pr
         speedFactor={0.3}
         speed={speed}
         paused={paused}
-        bottom={BOTTOM_FRAME + 60}
+        bottom={BOTTOM_FRAME + (mobile ? 40 : 60)}
         height={FOREST_HEIGHT}
       >
         <Forest />
