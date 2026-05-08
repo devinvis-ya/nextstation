@@ -7,12 +7,11 @@ interface Props {
 const RIVET = 6;
 
 export default function WindowFrame({ width, height, mobile = false }: Props) {
-  const TOP_FRAME = mobile ? 18 : 28;
-  const SIDE_FRAME = mobile ? 14 : 28;
-  const BOTTOM_FRAME = mobile ? 70 : 92;
-  const rivetSize = mobile ? 4 : RIVET;
+  const TOP_FRAME = mobile ? 14 : 28;
+  const SIDE_FRAME = mobile ? 10 : 28;
+  const BOTTOM_FRAME = mobile ? 56 : 92;
+  const rivetSize = mobile ? 3 : RIVET;
 
-  // Заклёпки по углам
   const rivets: JSX.Element[] = [];
   const cornerPositions: [number, number][] = [
     [SIDE_FRAME / 2 - rivetSize / 2, TOP_FRAME / 2 - rivetSize / 2],
@@ -33,8 +32,7 @@ export default function WindowFrame({ width, height, mobile = false }: Props) {
       />,
     );
   });
-  // Боковые заклёпки (на вертикальных гранях)
-  const sideStep = mobile ? 60 : 80;
+  const sideStep = mobile ? 80 : 80;
   for (let y = TOP_FRAME + 60; y < height - BOTTOM_FRAME - 30; y += sideStep) {
     rivets.push(
       <rect

@@ -12,7 +12,7 @@ interface Props {
 
 export default function TrainWindow({ speed, paused = false, mobile = false, onWindowClick }: Props) {
   // Должно совпадать с BOTTOM_FRAME в WindowFrame.tsx
-  const BOTTOM_FRAME = mobile ? 70 : 92;
+  const BOTTOM_FRAME = mobile ? 56 : 92;
 
   return (
     <div

@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function MuteButton({ muted, onToggle, mobile = false }: Props) {
-  const size = mobile ? 13 : 18;
+  const size = mobile ? 11 : 18;
   return (
     <button
       onClick={(e) => {
@@ -16,16 +16,15 @@ export default function MuteButton({ muted, onToggle, mobile = false }: Props) {
       }}
       style={{
         position: 'absolute',
-        // На мобиле — в верхнем левом углу, чтобы не перекрывать прогресс-бар
         top: mobile ? 6 : undefined,
         left: mobile ? 6 : undefined,
         bottom: mobile ? undefined : 16,
         right: mobile ? undefined : 16,
         zIndex: 30,
-        background: 'rgba(0,0,0,0.78)',
+        background: 'rgba(0,0,0,0.8)',
         border: '1px solid #ff8c00',
-        borderRadius: 6,
-        padding: mobile ? 4 : 8,
+        borderRadius: 5,
+        padding: mobile ? 3 : 8,
         color: '#ff8c00',
         cursor: 'pointer',
         display: 'flex',

@@ -24,11 +24,11 @@ export default function App() {
   const mobile = size.w < MOBILE_BREAKPOINT;
 
   // Параметры расположения, зависящие от размера экрана
-  const STATION_REST_OFFSET = mobile ? 60 : 280;
+  const STATION_REST_OFFSET = mobile ? 50 : 280;
   const STATION_OFF_RIGHT = mobile ? size.w : 800;
   const STATION_OFF_LEFT = mobile ? -size.w : -1200;
-  const TRAIN_BOTTOM = mobile ? 74 : 96;
-  const STATION_BOTTOM = mobile ? 74 : 96;
+  const TRAIN_BOTTOM = mobile ? 64 : 96;
+  const STATION_BOTTOM = mobile ? 64 : 96;
 
   const {
     progress,
@@ -99,7 +99,8 @@ export default function App() {
       style={{
         position: 'relative',
         width: '100vw',
-        height: '100vh',
+        // 100dvh учитывает скрывающийся URL-бар iOS Safari
+        height: '100dvh',
         overflow: 'hidden',
         background: '#000',
       }}

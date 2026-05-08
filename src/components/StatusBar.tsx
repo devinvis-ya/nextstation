@@ -12,18 +12,18 @@ export default function StatusBar({ city, glitching, tripCount, mobile = false }
     <div
       style={{
         position: 'absolute',
-        top: mobile ? 56 : 56,
+        top: mobile ? 6 : 56,
         left: '50%',
         transform: 'translateX(-50%)',
         background: 'rgba(0,0,0,0.88)',
         border: mobile ? '1px solid #2a2a2a' : '2px solid #2a2a2a',
-        borderRadius: mobile ? 6 : 8,
-        padding: mobile ? '7px 14px' : '14px 40px',
-        boxShadow: '0 0 26px rgba(255,140,0,0.22)',
+        borderRadius: mobile ? 5 : 8,
+        padding: mobile ? '4px 10px' : '14px 40px',
+        boxShadow: '0 0 18px rgba(255,140,0,0.22)',
         zIndex: 20,
         textAlign: 'center',
         minWidth: mobile ? undefined : 480,
-        maxWidth: mobile ? 'calc(100vw - 40px)' : undefined,
+        maxWidth: mobile ? 'calc(100vw - 90px)' : undefined,
         whiteSpace: 'nowrap',
       }}
     >
@@ -31,7 +31,7 @@ export default function StatusBar({ city, glitching, tripCount, mobile = false }
         className="font-display"
         style={{
           color: '#ff8c00',
-          fontSize: mobile ? 9 : 17,
+          fontSize: mobile ? 7 : 17,
           letterSpacing: mobile ? 1 : 3,
           opacity: 0.75,
         }}
@@ -42,11 +42,13 @@ export default function StatusBar({ city, glitching, tripCount, mobile = false }
         className="font-display"
         style={{
           color: glitching ? '#ffd060' : '#ff8c00',
-          fontSize: mobile ? 16 : 34,
-          letterSpacing: mobile ? 1 : 4,
-          marginTop: mobile ? 3 : 6,
+          fontSize: mobile ? 12 : 34,
+          letterSpacing: mobile ? 0.5 : 4,
+          marginTop: mobile ? 2 : 6,
           fontWeight: 'bold',
           whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
         }}
       >
         <GlitchText text={city.toUpperCase()} glitching={glitching} />
@@ -56,10 +58,10 @@ export default function StatusBar({ city, glitching, tripCount, mobile = false }
           className="font-display"
           style={{
             color: '#ff8c00',
-            fontSize: mobile ? 9 : 11,
+            fontSize: mobile ? 7 : 11,
             letterSpacing: mobile ? 1 : 2,
             opacity: 0.5,
-            marginTop: mobile ? 3 : 6,
+            marginTop: mobile ? 1 : 6,
           }}
         >
           петля #{tripCount}
